@@ -1,0 +1,25 @@
+﻿@page
+@using Models
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-6 offset-lg-3">
+            <form method="post">
+                <input asp-for="CurrentResult.Value1" type="number" class="form-control mb-3" />
+                <input asp-for="CurrentResult.Value2" type="number" class="form-control mb-3" />
+                <div class="d-flex justify-content-around">                    
+                    <button type="submit" asp-page-handler="MultiplyNumbers" class="btn btn-primary">Multiply</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 offset-lg-3">
+            <p class="text-center">@($"Current Result: {Model.CurrentResult.Value1} * {Model.CurrentResult.Value2} = {Model.CurrentResult.Result()}")</p>
+            <p class="text-center">@($"Previous Result: {Model.PreviousResult.Value1} * {Model.PreviousResult.Value2} = {Model.PreviousResult.Result()}")</p>
+        </div>
+    </div>
+</div>
