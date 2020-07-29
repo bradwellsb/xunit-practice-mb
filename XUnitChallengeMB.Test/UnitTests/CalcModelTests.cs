@@ -14,9 +14,8 @@ namespace XUnitChallengeMB.Test.UnitTests
         [InlineData(1, 2, 2)]
         public void OnValue1Value2_ReturnMultipliedResult(int value1, int value2, int expectedResult)
         {
-            //arrange
+            //act
             CalcModel calcModel = new CalcModel() { Value1 = value1, Value2 = value2 };
-
 
             //assert
             Assert.Equal(expectedResult, calcModel.Result());

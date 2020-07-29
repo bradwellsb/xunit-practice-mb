@@ -24,19 +24,27 @@ namespace XUnitChallengeMB.Web.Pages
             _calcService = calcService;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             CurrentResult = new CalcModel();
             PreviousResult = _calcService.GetPreviousResult();
+            return Page();
         }
 
-        public void OnPostMultiplyNumbers()
+        public IActionResult OnPostMultiplyNumbers()
         {
+            if (!ModelState.IsValid)
+            {
+                //not good ux, but works for demo purposes
+                return BadRequest();
+            }
+
             //Get new previous calcuation
             PreviousResult = _calcService.GetPreviousResult();
-
             //Save current calculation
             _calcService.StoreResult(CurrentResult);
+
+            return Page();
         }
     }
 }
