@@ -7,11 +7,10 @@ using Xunit;
 using XUnitChallengeMB.Web.Models;
 using XUnitChallengeMB.Web.Pages;
 using XUnitChallengeMB.Web.Services;
-using static XUnitChallengeMB.Test.Utilities;
 
 namespace XUnitChallengeMB.Test.UnitTests
 {
-    public class IndexPageTests
+    public class IndexPageTests : IClassFixture<TestServiceFixture>
     {
         private ServiceProvider _serviceProvider;
 
@@ -26,14 +25,14 @@ namespace XUnitChallengeMB.Test.UnitTests
         {
             using (var scope = _serviceProvider.CreateScope())
             {
-                var pageModel = new IndexModel(scope.ServiceProvider.GetService<ICalcService>());
+                var pageModel = new IndexModel(_serviceProvider.GetService<ICalcService>());
                 pageModel.CurrentResult = new CalcModel() { Value1 = value1, Value2 = value2 };
 
                 //act
                 pageModel.OnPostMultiplyNumbers();
 
                 //assert
-                Assert.Equal(new CalcModel(), pageModel.PreviousResult);
+                Assert.Equal(new CalcModel().Result(), pageModel.PreviousResult.Result());
             }
         }
 
