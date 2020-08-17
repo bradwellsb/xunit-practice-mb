@@ -27,7 +27,7 @@ namespace XUnitChallengeMB.Test.UnitTests
             using (var scope = _serviceProvider.CreateScope())
             {
                 //arrange
-                var pageModel = new IndexModel(_serviceProvider.GetService<ICalcService>());                
+                var pageModel = new IndexModel(scope.ServiceProvider.GetService<ICalcService>());                
 
                 //act
                 pageModel.ModelState.AddModelError("Error", "Description");
@@ -44,7 +44,7 @@ namespace XUnitChallengeMB.Test.UnitTests
             using (var scope = _serviceProvider.CreateScope())
             {
                 //arrange
-                var pageModel = new IndexModel(_serviceProvider.GetService<ICalcService>());
+                var pageModel = new IndexModel(scope.ServiceProvider.GetService<ICalcService>());
 
                 //act                
                 var result = pageModel.OnPostMultiplyNumbers();
